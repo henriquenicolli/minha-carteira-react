@@ -1,8 +1,10 @@
 import React from 'react';
 
-import { Container } from './styles';
 import ContentHeader from '../../components/ContentHeader';
 import SelectInput from '../../components/SelectInput';
+import HistoryFinanceCard from '../../components/HistoryFinanceCard';
+
+import { Container, Content } from './styles';
 
 const List: React.FC = () => {
 
@@ -14,9 +16,82 @@ const List: React.FC = () => {
 
     return (
         <Container>
-            <ContentHeader title="Saidas" lineColor="#E44">
+            <ContentHeader title="Saidas" lineColor="#E44C4E">
                 <SelectInput options={options}></SelectInput>
             </ContentHeader>
+
+            <Content>
+                <HistoryFinanceCard
+                    cardColor="#313862"
+                    tagColor="#e44c4e"
+                    title="Conta de Luz"
+                    subtitle="31/08/2022"
+                    amount="R$ 150,00"></HistoryFinanceCard>
+
+                <HistoryFinanceCard
+                    cardColor="#313862"
+                    tagColor="#e44c4e"
+                    title="Conta de Luz"
+                    subtitle="31/08/2022"
+                    amount="R$ 150,00"></HistoryFinanceCard>
+
+                <HistoryFinanceCard
+                    cardColor="#313862"
+                    tagColor="#e44c4e"
+                    title="Conta de Luz"
+                    subtitle="31/08/2022"
+                    amount="R$ 150,00"></HistoryFinanceCard>
+
+                <HistoryFinanceCard
+                    cardColor="#313862"
+                    tagColor="#e44c4e"
+                    title="Conta de Luz"
+                    subtitle="31/08/2022"
+                    amount="R$ 150,00"></HistoryFinanceCard>
+
+                <HistoryFinanceCard
+                    cardColor="#313862"
+                    tagColor="#e44c4e"
+                    title="Conta de Luz"
+                    subtitle="31/08/2022"
+                    amount="R$ 150,00"></HistoryFinanceCard>
+
+                <HistoryFinanceCard
+                    cardColor="#313862"
+                    tagColor="#e44c4e"
+                    title="Conta de Luz"
+                    subtitle="31/08/2022"
+                    amount="R$ 150,00"></HistoryFinanceCard>
+
+                <HistoryFinanceCard
+                    cardColor="#313862"
+                    tagColor="#e44c4e"
+                    title="Conta de Luz"
+                    subtitle="31/08/2022"
+                    amount="R$ 150,00"></HistoryFinanceCard>
+
+                <HistoryFinanceCard
+                    cardColor="#313862"
+                    tagColor="#e44c4e"
+                    title="Conta de Luz"
+                    subtitle="31/08/2022"
+                    amount="R$ 150,00"></HistoryFinanceCard>
+
+                <HistoryFinanceCard
+                    cardColor="#313862"
+                    tagColor="#e44c4e"
+                    title="Conta de Luz"
+                    subtitle="31/08/2022"
+                    amount="R$ 150,00"></HistoryFinanceCard>
+
+                <HistoryFinanceCard
+                    cardColor="#313862"
+                    tagColor="#e44c4e"
+                    title="Conta de Luz"
+                    subtitle="31/08/2022"
+                    amount="R$ 150,00"></HistoryFinanceCard>
+            </Content>
+
         </Container>
     );
 }
