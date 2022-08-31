@@ -1,5 +1,4 @@
 import React from 'react';
-
 import logoImg from '../../assets/logo.svg';
 
 import {
@@ -16,7 +15,6 @@ import {
     LogImg,
     MenuContainer,
     MenuItemLink
-
 } from './styles';
 
 const Aside: React.FC = () => {
