@@ -4,11 +4,11 @@ import {
     Container,
 } from './styles';
 
-interface Props {
+interface IProps {
     children: React.ReactNode;
 }
 
-const Content: React.FC<Props> = ({ children }) => {
+const Content: React.FC<IProps> = ({ children }) => {
     return (
         <Container>
             {children}

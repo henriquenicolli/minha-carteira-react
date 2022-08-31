@@ -7,9 +7,9 @@ import SelectInput from '../../components/SelectInput';
 const List: React.FC = () => {
 
     const options = [
-        {value: 'Henrique', label: '1'},
-        {value: 'Jose', label: '2'},
-        {value: 'Ana', label: '3'},
+        {value: 'Henrique', label: 'Henrique'},
+        {value: 'Jose', label: 'Jose'},
+        {value: 'Ana', label: 'Ana'},
     ];
 
     return (
