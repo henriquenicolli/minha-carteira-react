@@ -7,8 +7,6 @@ import { useParams } from "react-router-dom";
 
 import { Container, Content, Filters } from './styles';
 
-
-
 const List: React.FC = () => {
 
     const { typeListRoute }  = useParams();
