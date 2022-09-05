@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useParams } from "react-router-dom";
-import { uuid } from 'uuidv4';
+import { v4 } from 'uuid';
 
 import ContentHeader from '../../components/ContentHeader';
 import SelectInput from '../../components/SelectInput';
@@ -30,6 +30,7 @@ const List: React.FC = () => {
     const [ data, setData ] = useState<IData[]>([]);
     const [ monthSelected, setMonthSelected ] = useState<string>(String(new Date().getMonth() + 1));
     const [ yearSelected, setYearSelected ] = useState<string>(String(new Date().getFullYear()));
+    const [ selectedFrequency, setSelectedFrequency ] = useState(['recorrente', 'eventual']);
 
     const title =  typeListRoute === 'entry-balance' ? 'Entradas' : 'Saidas';
     const lineColor = typeListRoute === 'entry-balance' ? '#F7931b' : '#E44C4E';
@@ -63,6 +64,18 @@ const List: React.FC = () => {
             }
         });
     },[listData]);
+
+    const handleFrequencyClick = (frequency: string) => {
+        const alreadySelected = selectedFrequency.findIndex(item => item === frequency);
+
+        if (alreadySelected >= 0) {
+            const filtered = selectedFrequency.filter(item => item != frequency);
+            setSelectedFrequency(filtered);
+        } else {
+            setSelectedFrequency((prev) => [...prev, frequency]);
+        }
+
+    } 
     
     useEffect(() => {
          const filteredData = listData.filter( item => {
@@ -70,12 +83,12 @@ const List: React.FC = () => {
             const month = String(date.getMonth() + 1);
             const year = String(date.getFullYear());
 
-            return month === monthSelected && year === yearSelected;
+            return month === monthSelected && year === yearSelected && selectedFrequency.includes(item.frequency);
          });
 
          const formattedData = filteredData.map(item => {
             return {
-                id: uuid(),
+                id: v4(),
                 description: item.description,
                 frequency: item.frequency,
                 amountFormatted: formatCurrency(Number(item.amount)),
@@ -85,7 +98,7 @@ const List: React.FC = () => {
         }); 
 
         setData(formattedData);
-    }, [listData, monthSelected, yearSelected]);
+    }, [listData, monthSelected, yearSelected, selectedFrequency]);
 
     return (
         <Container>
@@ -96,10 +109,12 @@ const List: React.FC = () => {
 
             <Filters>
                 <button type="button" 
-                className="tag-filter  tag-filter-recurrent">Recorrentes</button>
+                className={`tag-filter tag-filter-recurrent ${selectedFrequency.includes('recorrente') && 'tag-actived'}`}
+                onClick={() => handleFrequencyClick('recorrente')}>Recorrentes</button>
 
                 <button type="button" 
-                className="tag-filter tag-filter-eventual">Eventuais</button>
+                className={`tag-filter tag-filter-eventual ${selectedFrequency.includes('eventual') && 'tag-actived'}`}
+                onClick={() => handleFrequencyClick('eventual')}>Eventuais</button>
             </Filters>
 
             <Content>
