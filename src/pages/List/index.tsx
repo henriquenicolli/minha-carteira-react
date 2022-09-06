@@ -35,7 +35,7 @@ const List: React.FC = () => {
         if (typeListRoute === 'entry-balance') {
             return {
                 title: 'Entradas',
-                lineColor: '#F7931b',
+                lineColor: '#4E41F0',
                 data: gains
         }} else { 
             return {
