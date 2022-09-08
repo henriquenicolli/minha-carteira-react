@@ -14,5 +14,4 @@ export default {
         info: '#3B5998',
         warning: '#FF6961'
     }
-
-};;
+};
