@@ -4,6 +4,7 @@ import ContentHeader from '../../components/ContentHeader';
 import SelectInput from '../../components/SelectInput';
 import WalletBox from '../../components/WalletBox';
 import MessageBox from '../../components/MessageBox';
+import PieChartBox from '../../components/PieChartBox';
 
 import gains from '../../repositories/gains';
 import expenses from '../../repositories/expenses';
@@ -20,7 +21,6 @@ const Dashboard: React.FC = () => {
     const [ monthSelected, setMonthSelected ] = useState<number>(new Date().getMonth() + 1);
     const [ yearSelected, setYearSelected ] = useState<number>(new Date().getFullYear());
     
-
     const months = useMemo(() => {
         return listOfMonths.map((month, index) => {
             return {
@@ -124,6 +124,33 @@ const Dashboard: React.FC = () => {
         }
     },[totalBalance]);
 
+
+    const relationExpensesVersusGains = useMemo(() => {
+        const total = totalGains + totalExpenses;
+
+        const percentGains = (totalGains / total) * 100;
+        const percentExpenses = (totalExpenses / total) * 100;
+
+        const data = [
+            {
+                name: "Entradas",
+                value: totalExpenses,
+                percent: Number(percentGains.toFixed(1)),
+                color: '#E44C4E'
+            },
+            {
+                name: "Saidas",
+                value: totalExpenses,
+                percent: Number(percentExpenses.toFixed(1)),
+                color: '#F7931B'
+            }
+        ]
+
+        return data;
+
+    },[totalGains, totalExpenses]);
+
+
     const handleMonthSelected = (month: string) => {
         try {
             const parseMonth = Number(month);
@@ -186,6 +213,9 @@ const Dashboard: React.FC = () => {
                     description={message.description}
                     footerText={message.footerText}
                     icon={message.icon}></MessageBox>
+
+                <PieChartBox data={relationExpensesVersusGains}></PieChartBox>
+
             </Content>
 
         </Container>
