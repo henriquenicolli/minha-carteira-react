@@ -8,7 +8,7 @@ import {
     Tooltip
 } from 'recharts';
 
-//import { Legend } from '../PieChartBox/styles';
+import formatCurrency from '../../utils/formatCurrency';
 
 import {
     Container, 
@@ -57,7 +57,7 @@ const HistoryBox: React.FC<IHistoryBoxProps> = ({
                         dataKey="month" 
                         stroke='#cecece'></XAxis>
 
-                    <Tooltip></Tooltip>
+                    <Tooltip formatter={(value) => formatCurrency(Number(value)) }></Tooltip>
                     
                     <Line 
                         type="monotone" 
