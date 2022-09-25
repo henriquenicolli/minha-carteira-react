@@ -109,7 +109,14 @@ const Dashboard: React.FC = () => {
                 footerText: "Verifique seus gastos e tente cortar algumas coisas desnecessarias.",
                 icon: sadImg
             }
-        } else if (totalBalance == 0) {
+        } else if (totalBalance === 0 && totalExpenses === 0) {
+            return {
+                title: "Ops!",
+                description: "Neste mes, nao ha registros de entradas ou saidas.",
+                footerText: "Parece que voce nao fez nenhum registro do mês selecionado",
+                icon: sadImg
+            }
+        } else if (totalBalance === 0) {
             return {
                 title: "Ufaa!",
                 description: "Neste mes, voce gastou exatamente o que ganhou.",
@@ -124,26 +131,26 @@ const Dashboard: React.FC = () => {
                 icon: happyImg
             }
         }
-    },[totalBalance]);
+    },[totalBalance, totalGains, totalExpenses]);
 
 
     const relationExpensesVersusGains = useMemo(() => {
         const total = totalGains + totalExpenses;
 
-        const percentGains = (totalGains / total) * 100;
-        const percentExpenses = (totalExpenses / total) * 100;
+        const percentGains = Number(((totalGains / total) * 100).toFixed(1));
+        const percentExpenses = Number(((totalExpenses / total) * 100).toFixed(1));
 
         const data = [
             {
                 name: "Entradas",
-                value: totalExpenses,
-                percent: Number(percentGains.toFixed(1)),
+                value: totalGains,
+                percent: percentGains ? percentGains : 0,
                 color: '#E44C4E'
             },
             {
                 name: "Saidas",
                 value: totalExpenses,
-                percent: Number(percentExpenses.toFixed(1)),
+                percent: percentExpenses ? percentExpenses : 0,
                 color: '#F7931B'
             }
         ]
@@ -174,23 +181,26 @@ const Dashboard: React.FC = () => {
         })
         
         const total = amountRecurrent + amountEventual;
+        const percentualRecurrent = Number(((amountRecurrent / total) * 100).toFixed(1));
+        const percentEventual = Number(((amountEventual / total) * 100).toFixed(1));
 
         return [
             {
                 name: 'Recorrente',
                 amount: amountRecurrent,
-                percent: Number(((amountRecurrent / total) * 100).toFixed(1)),
+                percent: percentualRecurrent ? percentualRecurrent : 0,
                 color: "#F7931B"
             },
             {
                 name: 'Eventuais',
                 amount: amountEventual,
-                percent: Number(((amountEventual / total) * 100).toFixed(1)),
+                percent: percentEventual ? percentEventual : 0,
                 color: "#E44C4E"
             }
         ]
 
     },[monthSelected, yearSelected]);
+
 
     const relationGainsRecurrentVersusEventual = useMemo(() => {
         let amountRecurrent = 0;
@@ -213,23 +223,26 @@ const Dashboard: React.FC = () => {
         })
         
         const total = amountRecurrent + amountEventual;
+        const percentRecurrent = Number(((amountRecurrent / total) * 100).toFixed(1));
+        const percentEventual = Number(((amountEventual / total) * 100).toFixed(1));
 
         return [
             {
                 name: 'Recorrente',
                 amount: amountRecurrent,
-                percent: Number(((amountRecurrent / total) * 100).toFixed(1)),
+                percent: percentRecurrent ? percentRecurrent : 0,
                 color: "#F7931B"
             },
             {
                 name: 'Eventuais',
                 amount: amountEventual,
-                percent: Number(((amountEventual / total) * 100).toFixed(1)),
+                percent: percentEventual ? percentEventual : 0,
                 color: "#E44C4E"
             }
         ]
 
     },[monthSelected, yearSelected]);
+
 
     const historyData = useMemo(() => {
 
@@ -278,6 +291,7 @@ const Dashboard: React.FC = () => {
             return (yearSelected === currentYear && item.monthNumber <= currentMonth) || (yearSelected < currentYear);
         })
     },[yearSelected]);
+
 
     const handleMonthSelected = (month: string) => {
         try {
