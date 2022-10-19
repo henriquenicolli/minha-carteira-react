@@ -1,9 +1,11 @@
-# Getting Started with Create React App
+# Exemplo de um front-end utilizando React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Aplicação para realizar um controle de carteira utilizando React.js
 
-## Available Scripts
+## Para executar:
 
-In the project directory, you can run:
 
 ### `yarn start`
+
+
+#Henrique Nicolli
